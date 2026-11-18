@@ -1,11 +1,11 @@
 import {
-  ArrowDownToLine,
   ArrowUpRight,
   Timer,
   ChartNoAxesColumnIncreasing,
   Fingerprint,
   Plus,
 } from "lucide-react";
+import DownloadLink from "./components/DownloadLink";
 import Preview from "./components/Preview";
 import { origin, repository, description } from "./site";
 
@@ -25,6 +25,10 @@ const faqs = [
   [
     "Does my usage history leave my Mac?",
     "Slopwatch keeps usage history on your Mac and collects no telemetry. The signed-in Claude CLI can contact Anthropic for current limits. Slopwatch checks GitHub for app updates.",
+  ],
+  [
+    "What does this website count?",
+    "The website counts page views and clicks on Download for Mac. It estimates daily visitors without cookies. It respects Global Privacy Control and Do Not Track. The Mac app collects no telemetry.",
   ],
   [
     "How do I install it?",
@@ -94,10 +98,7 @@ export default function Page() {
               See Claude Code and Codex usage in your Mac menu bar. Check your
               next reset, count your tokens, and see their value at API prices.
             </p>
-            <a className="download" href="/download">
-              <ArrowDownToLine size={19} />
-              Download for Mac
-            </a>
+            <DownloadLink />
             <div className="compat">
               Free · macOS 26+ · Apple silicon &amp; Intel
             </div>
