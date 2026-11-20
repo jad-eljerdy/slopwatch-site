@@ -5,7 +5,8 @@ import { ArrowDownToLine } from "lucide-react";
 
 function record(event) {
   if (navigator.globalPrivacyControl || navigator.doNotTrack === "1") return;
-  const path = "/api/metrics/" + event;
+  const page = window.location.pathname === "/changelog" ? "?page=changelog" : "";
+  const path = "/api/metrics/" + event + page;
   if (!navigator.sendBeacon?.(path)) {
     fetch(path, { method: "POST", keepalive: true }).catch(() => {});
   }

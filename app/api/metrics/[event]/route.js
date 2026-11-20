@@ -9,6 +9,7 @@ const events = new Map([
 export async function POST(request, { params }) {
   const event = events.get((await params).event);
   if (!event) return new Response(null, { status: 404 });
+  const pathname = new URL(request.url).searchParams.get("page") === "changelog" ? "/changelog" : "/";
   const headers = request.headers;
   if (headers.get("origin") !== new URL(request.url).origin) {
     return new Response(null, { status: 403 });
@@ -38,9 +39,9 @@ export async function POST(request, { params }) {
           distinct_id: id,
           $process_person_profile: false,
           $geoip_disable: true,
-          $current_url: origin + "/",
+          $current_url: origin + pathname,
           $host: new URL(origin).host,
-          $pathname: "/",
+          $pathname: pathname,
         },
       }),
       signal: AbortSignal.timeout(4000),
