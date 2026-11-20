@@ -96,7 +96,7 @@ export default function Page() {
               {[
                 [
                   PanelTop, "Quota beside the clock",
-                  "Show Codex, Claude, or both in your menu bar. Each icon shows the lowest percentage left across that provider’s current limits. Hover to see which limit it is.",
+                  "Show Codex, Claude, or both in your menu bar. Claude shows its five-hour balance by default. Codex shows its lowest remaining balance. Choose five-hour above weekly in General settings to see both readings for either provider.",
                 ],
                 [
                   Timer, "Five-hour and weekly limits",

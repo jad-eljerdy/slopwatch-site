@@ -1,6 +1,16 @@
 // Newest first. Use the public GitHub tag and its publication date in UTC.
 export const releases = [
   {
+    tag: "v1.1.7",
+    date: "2026-11-20",
+    title: "Five-hour and weekly balances together",
+    changes: [
+      "Claude now shows its five-hour balance by default. Codex starts with its lowest remaining balance. You can choose the limit for each provider in General settings.",
+      "Select 5-hour above weekly to show both readings beside a provider icon. A dash marks a window without a current reading.",
+      "When reset reminders are enabled, Slopwatch asks for notification permission on launch if you have not made a choice. You can grant permission before either provider reports a banked reset.",
+    ],
+  },
+  {
     tag: "v1.1.6",
     date: "2026-11-20",
     title: "Remaining limits in the menu bar",
