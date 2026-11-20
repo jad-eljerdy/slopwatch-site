@@ -1,11 +1,14 @@
 import {
-  ArrowUpRight,
+  PanelTop,
+  Settings2,
+  RefreshCw,
   Timer,
   ChartNoAxesColumnIncreasing,
   Fingerprint,
   Plus,
 } from "lucide-react";
 import DownloadLink from "./components/DownloadLink";
+import { Header, Footer } from "./components/SiteNav";
 import Preview from "./components/Preview";
 import { origin, repository, description } from "./site";
 
@@ -16,7 +19,7 @@ const faqs = [
   ],
   [
     "Which subscription limits can I see?",
-    "Slopwatch shows the five-hour and weekly windows that each provider reports. Each reading includes the percentage used and its reset time when available.",
+    "Slopwatch shows the five-hour and weekly windows that each provider reports. The panel shows how much is left by default. You can switch to percentage used in General settings. Reset times appear when the provider reports them.",
   ],
   [
     "How does Slopwatch estimate API cost?",
@@ -41,16 +44,6 @@ const faqs = [
     </>,
   ],
 ];
-function Brand() {
-  return (
-    <a className="brand" href="/" aria-label="Slopwatch home">
-      <span>
-        <Timer size={22} strokeWidth={2.3} />
-      </span>
-      Slopwatch
-    </a>
-  );
-}
 export default function Page() {
   const schema = {
     "@context": "https://schema.org",
@@ -70,19 +63,7 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <a href="#main" className="skip">
-        Skip to content
-      </a>
-      <header className="wrap nav">
-        <Brand />
-        <nav aria-label="Main navigation">
-          <a href="#details">Features</a>
-          <a href="#questions">FAQ</a>
-          <a className="source" href={repository}>
-            GitHub <ArrowUpRight size={15} />
-          </a>
-        </nav>
-      </header>
+      <Header />
       <main id="main">
         <section className="wrap hero">
           <div className="pitch">
@@ -95,8 +76,9 @@ export default function Page() {
               <em>limits.</em>
             </h1>
             <p>
-              See Claude Code and Codex usage in your Mac menu bar. Check your
-              next reset, count your tokens, and see their value at API prices.
+              See how much Codex and Claude Code usage you have left beside the
+              clock on your Mac. Open the panel for reset times, token counts, and
+              the value of your usage at API prices.
             </p>
             <DownloadLink />
             <div className="compat">
@@ -108,25 +90,33 @@ export default function Page() {
         <section id="details" className="details">
           <div className="wrap">
             <div className="section-head">
-              <span className="eyebrow">INSIDE THE APP</span>
-              <h2>What the stopwatch shows.</h2>
+              <h2>Inside <em>Slopwatch.</em></h2>
             </div>
             <div className="features">
               {[
                 [
-                  Timer,
-                  "Time until reset",
-                  "See your reported five-hour and weekly limits before you start another task.",
+                  PanelTop, "Quota beside the clock",
+                  "Show Codex, Claude, or both in your menu bar. Each icon shows the lowest percentage left across that provider’s current limits. Hover to see which limit it is.",
                 ],
                 [
-                  ChartNoAxesColumnIncreasing,
-                  "Tokens and API value",
-                  "Compare the last 24 hours, 7 days, or 30 days. View both providers together or select one.",
+                  Timer, "Five-hour and weekly limits",
+                  "Open the panel to see how much each window has left and when it resets. A dash in the menu bar means the provider has no current reading.",
                 ],
                 [
-                  Fingerprint,
-                  "Local usage history",
-                  "Slopwatch reads the CLI sessions on your Mac. It needs no Slopwatch account and collects no telemetry.",
+                  ChartNoAxesColumnIncreasing, "Tokens and API value",
+                  "Compare the last 12 hours, 24 hours, 7 days, or 30 days. View both providers together or select one. Slopwatch includes compressed Codex history and applies model-specific API prices.",
+                ],
+                [
+                  Settings2, "Checks on your schedule",
+                  "Check subscription limits every 1, 3, 5, 10, 30, or 60 minutes. The default is 5 minutes. Refresh on demand, switch between used and remaining, or hide disconnected subscriptions.",
+                ],
+                [
+                  Fingerprint, "Local usage history",
+                  "Sign in with the CLI you already use. Slopwatch reads session logs on your Mac and collects no app telemetry. You can use either subscription on its own.",
+                ],
+                [
+                  RefreshCw, "Signed app updates",
+                  "Slopwatch checks daily when automatic updates are on. If your Mac was asleep or offline, it checks at the next opportunity. You can also check for updates from the panel.",
                 ],
               ].map(([Icon, name, copy]) => (
                 <article key={name}>
@@ -136,6 +126,22 @@ export default function Page() {
                 </article>
               ))}
             </div>
+          </div>
+        </section>
+        <section className="wrap reset-feature" aria-labelledby="banked-title">
+          <div>
+            <h2 id="banked-title">Before a banked reset <em>expires.</em></h2>
+            <p>Some subscriptions include extra resets you can save for later. Open provider details to see how many you have and when each one expires. Follow the review link to use a reset on the provider’s website.</p>
+            <a className="text-link" href="/changelog#v1.1.6">Read the v1.1.6 release notes</a>
+          </div>
+          <div className="reminder-info">
+            <h3>Expiry reminders</h3>
+            <dl>
+              <div><dt>Default notice</dt><dd>24 hours before expiry</dd></div>
+              <div><dt>Other options</dt><dd>1, 6, 12, or 48 hours</dd></div>
+              <div><dt>Set it in</dt><dd>Settings → Notifications</dd></div>
+            </dl>
+            <p>Reminders need a reported expiry date. If Claude Code omits the balance, you can import the count from the Claude usage page.</p>
           </div>
         </section>
         <section id="questions" className="wrap faq">
@@ -158,17 +164,7 @@ export default function Page() {
           </div>
         </section>
       </main>
-      <footer>
-        <div className="wrap">
-          <Brand />
-          <a href="https://jad.sh">
-            Made by Jad <ArrowUpRight size={14} />
-          </a>
-          <a href={repository + "/releases"}>
-            Release notes <ArrowUpRight size={14} />
-          </a>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

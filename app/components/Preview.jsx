@@ -4,6 +4,13 @@ import { Timer, Wifi, BatteryFull, SlidersHorizontal } from "lucide-react";
 
 const samples = [
   {
+    period: "12h",
+    tokens: "1.16M",
+    cost: "$4.07",
+    start: "12 hours ago",
+    bars: [4, 8, 12, 9, 6, 13, 21, 14, 11, 8, 10, 15, 22, 28, 19, 11, 9, 14, 23, 31, 36, 30, 18, 12],
+  },
+  {
     period: "24h",
     tokens: "2.48M",
     cost: "$8.62",
@@ -51,7 +58,7 @@ const rows = [
   },
 ];
 export default function Preview() {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(1);
   const data = samples[index];
   return (
     <figure
@@ -63,7 +70,9 @@ export default function Preview() {
         <div className="crosshair" />
       </div>
       <div className="macbar" aria-hidden="true">
-        <Timer size={18} />
+        <div className="preview-glance">
+          {rows.map(row => <span key={row.icon}><img src={"/" + row.icon + ".png"} width="16" height="16" alt="" />{100 - row.used}%</span>)}
+        </div>
         <Wifi size={17} />
         <BatteryFull size={20} />
         <SlidersHorizontal size={15} />
@@ -133,10 +142,10 @@ export default function Preview() {
               <span>{row.label}</span>
             </div>
             <div className="progress">
-              <i style={{ width: row.used + "%" }} />
+              <i style={{ width: (100 - row.used) + "%" }} />
             </div>
             <div className="reset">
-              <span>{row.used}% used</span>
+              <span>{100 - row.used}% left</span>
               <span>Resets {row.reset}</span>
             </div>
           </div>
