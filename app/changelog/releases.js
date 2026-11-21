@@ -1,6 +1,39 @@
 // Newest first. Use the public GitHub tag and its publication date in UTC.
 export const releases = [
   {
+    tag: "v1.1.12",
+    date: "2026-11-21",
+    title: "Lower CPU use in the menu bar",
+    changes: [
+      "Slopwatch draws the provider icons and percentages as one image. It replaces the image when a visible value changes. The single-line and stacked layouts keep their existing settings.",
+      "The closed panel skips the extra one-minute activity scan. Scheduled limit checks, expiry reminders, and refresh on opening still work.",
+    ],
+  },
+  {
+    tag: "v1.1.11",
+    date: "2026-11-21",
+    title: "Claude Code 2.1.330 compatibility",
+    changes: ["Verified the CLI usage request and local session accounting against Claude Code 2.1.330. Reviewed the bundled API rates."],
+  },
+  {
+    tag: "v1.1.10",
+    date: "2026-11-21",
+    title: "Codex readings above 100% used",
+    changes: ["Verified Codex 0.171.0. When Codex reports more than 100% used, Slopwatch shows 0% remaining and keeps the reset time and other limits from the same reading."],
+  },
+  {
+    tag: "v1.1.9",
+    date: "2026-11-21",
+    title: "Claude Code 2.1.329 compatibility",
+    changes: ["Verified subscription usage and token accounting with Claude Code 2.1.329."],
+  },
+  {
+    tag: "v1.1.8",
+    date: "2026-11-21",
+    title: "Claude Code 2.1.328 compatibility",
+    changes: ["Verified subscription usage and token accounting with Claude Code 2.1.328."],
+  },
+  {
     tag: "v1.1.7",
     date: "2026-11-20",
     title: "Five-hour and weekly balances together",
